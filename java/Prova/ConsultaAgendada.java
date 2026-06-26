@@ -50,7 +50,6 @@ public class ConsultaAgendada {
     private static int quantidade = 0;
     private String nomeMedico;
 
-    // Construtor padrão: lê tudo via teclado
     public ConsultaAgendada() {
         System.out.println("=== Dados da Data da Consulta ===");
         this.data = new Data();
@@ -61,7 +60,7 @@ public class ConsultaAgendada {
         quantidade++;
     }
 
-    // Construtor com valores primitivos
+    
     public ConsultaAgendada(int h, int mi, int s, int d, int m, int a, String p, String med) {
         this.hora = new Hora(h, mi, s);
         this.data = new Data(d, m, a);
@@ -70,7 +69,7 @@ public class ConsultaAgendada {
         quantidade++;
     }
 
-    // Construtor com objetos Data e Hora
+  
     public ConsultaAgendada(Data d, Hora h, String p, String med) {
         this.data = d;
         this.hora = h;
@@ -79,7 +78,7 @@ public class ConsultaAgendada {
         quantidade++;
     }
 
-    // Setters com parâmetros (para data e hora)
+    
     public void setData(int a, int b, int c) {
         this.data = new Data(a, b, c);
     }
@@ -96,7 +95,7 @@ public class ConsultaAgendada {
         this.nomeMedico = m;
     }
 
-    // Setters com leitura via teclado
+
     public void setData() {
         System.out.println("=== Alterando Data da Consulta ===");
         this.data = new Data();
@@ -119,12 +118,12 @@ public class ConsultaAgendada {
         this.nomeMedico = sc.nextLine().trim();
     }
 
-    // Getters
+
     public static int getAmostra() {
         return quantidade;
     }
 
-    // Retorna data no formato dd/mm/aa
+   
     public String getData() {
         return String.format("%02d/%02d/%02d",
                 data.getDia(),
@@ -132,7 +131,7 @@ public class ConsultaAgendada {
                 data.getAno() % 100);
     }
 
-    // Retorna hora no formato hh:mm:ss
+  
     public String getHora() {
         return hora.mostra();
     }
@@ -145,7 +144,6 @@ public class ConsultaAgendada {
         return nomeMedico;
     }
 
-    // Exibe todas as propriedades formatadas
     public String toString() {
         return "Paciente : " + nomePaciente  + "\n" +
                "Médico   : " + nomeMedico    + "\n" +
