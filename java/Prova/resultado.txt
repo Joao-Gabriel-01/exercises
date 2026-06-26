@@ -1,0 +1,20 @@
+--- Propriedades de p1 (inicial) ---
+Paciente : Ana Paula
+Médico   : Dr. Carlos
+Data     : 25/06/25
+Hora     : 14:30:00
+
+--- Propriedades de p2 ---
+Paciente : Paulo
+Médico   : Dr. Carlos
+Data     : 11/11/26
+Hora     : 11:00:00
+
+--- Propriedades de p1 (após alteração) ---
+Paciente : Ana Paula
+Médico   : Dr. Carlos
+Data     : 12/12/26
+Hora     : 11:00:00
+
+Quantidade total de consultas agendadas: 2
+
