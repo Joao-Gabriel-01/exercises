@@ -5,23 +5,18 @@ using System.Windows.Forms;
 
 namespace BilheteriaTeatro
 {
-    /// <summary>
-    /// Formulário principal do sistema de bilheteria do teatro.
-    /// Toda a interface (poltronas, botão de faturamento e label de resultado)
-    /// é criada dinamicamente em código, sem uso do Designer do Windows Forms.
-    /// </summary>
+   
     public partial class Form1 : Form
     {
-        // ---------- Constantes do teatro ----------
+      
         private const int FILEIRAS = 15;
         private const int COLUNAS = 40;
 
-        // ---------- Constantes de layout ----------
+       
         private const int TAMANHO_BOTAO = 22;
         private const int ESPACAMENTO = 2;
         private const int MARGEM_PAINEL = 15;
 
-        // ---------- Estado do domínio ----------
         private enum EstadoPoltrona
         {
             Vaga,
@@ -31,16 +26,16 @@ namespace BilheteriaTeatro
 
         private class Poltrona
         {
-            public int Fileira;   // índice 0-based (0 a 14)
-            public int Coluna;    // índice 0-based (0 a 39)
+            public int Fileira;   
+            public int Coluna;    
             public EstadoPoltrona Estado;
             public Button Botao;
         }
 
-        // Matriz de poltronas (vetores/matrizes - conteúdo do nivelamento)
+       
         private readonly Poltrona[,] poltronas = new Poltrona[FILEIRAS, COLUNAS];
 
-        // Componentes criados dinamicamente
+        
         private Panel painelPoltronas;
         private Button btnFaturamento;
         private Label lblFaturamento;
@@ -54,9 +49,6 @@ namespace BilheteriaTeatro
             CriarControlesDeFaturamento();
         }
 
-        // ---------------------------------------------------------------
-        // Configuração geral do formulário
-        // ---------------------------------------------------------------
         private void ConfigurarFormulario()
         {
             Text = "Projeto Teatro - Bilheteria";
@@ -72,9 +64,7 @@ namespace BilheteriaTeatro
             dicaPoltrona = new ToolTip();
         }
 
-        // ---------------------------------------------------------------
-        // Criação dinâmica do mapa de poltronas (grade 15 x 40)
-        // ---------------------------------------------------------------
+       
         private void CriarMapaDePoltronas()
         {
             int larguraPainel = COLUNAS * (TAMANHO_BOTAO + ESPACAMENTO) + ESPACAMENTO;
@@ -126,9 +116,7 @@ namespace BilheteriaTeatro
             }
         }
 
-        // ---------------------------------------------------------------
-        // Criação dinâmica do botão "Faturamento" e do label de resultado
-        // ---------------------------------------------------------------
+
         private void CriarControlesDeFaturamento()
         {
             btnFaturamento = new Button
@@ -150,9 +138,6 @@ namespace BilheteriaTeatro
             Controls.Add(lblFaturamento);
         }
 
-        // ---------------------------------------------------------------
-        // Evento de clique em uma poltrona
-        // ---------------------------------------------------------------
         private void BotaoPoltrona_Click(object sender, EventArgs e)
         {
             Button botao = (Button)sender;
@@ -160,7 +145,7 @@ namespace BilheteriaTeatro
 
             if (!CoordenadaValida(posicao.Fileira, posicao.Coluna))
             {
-                return; // Segurança extra: nunca deve ocorrer, pois o Tag é gerado internamente
+                return; 
             }
 
             Poltrona poltrona = poltronas[posicao.Fileira, posicao.Coluna];
@@ -187,9 +172,7 @@ namespace BilheteriaTeatro
             }
         }
 
-        // ---------------------------------------------------------------
-        // Solicita ao usuário o tipo de reserva desejado
-        // ---------------------------------------------------------------
+
         private EstadoPoltrona? PerguntarTipoDeEntrada(int fileira, int coluna)
         {
             decimal valorCheio = ValorCheioFileira(fileira);
@@ -214,12 +197,10 @@ namespace BilheteriaTeatro
                 return EstadoPoltrona.Meia;
             }
 
-            return null; // Cancelado
+            return null; 
         }
 
-        // ---------------------------------------------------------------
-        // Atualiza a aparência do botão conforme o estado da poltrona
-        // ---------------------------------------------------------------
+      
         private void AtualizarVisualPoltrona(Poltrona poltrona)
         {
             switch (poltrona.Estado)
@@ -241,9 +222,7 @@ namespace BilheteriaTeatro
             }
         }
 
-        // ---------------------------------------------------------------
-        // Cálculo e exibição do faturamento
-        // ---------------------------------------------------------------
+     
         private void BtnFaturamento_Click(object sender, EventArgs e)
         {
             int qtdeOcupadas = 0;
@@ -275,12 +254,10 @@ namespace BilheteriaTeatro
                 $"Valor da bilheteria: {FormatarMoeda(valorTotal)}";
         }
 
-        // ---------------------------------------------------------------
-        // Regras de precificação por fileira
-        // ---------------------------------------------------------------
+
         private decimal ValorCheioFileira(int fileira)
         {
-            int fileiraHumana = fileira + 1; // fileira recebida é 0-based
+            int fileiraHumana = fileira + 1; 
 
             if (fileiraHumana >= 1 && fileiraHumana <= 5)
             {
@@ -292,22 +269,19 @@ namespace BilheteriaTeatro
                 return 30m;
             }
 
-            // Fileiras 11 a 15
+           
             return 15m;
         }
 
-        // ---------------------------------------------------------------
-        // Validação de coordenadas (garante consistência dos dados)
-        // ---------------------------------------------------------------
+      
+        // Validação de coordenadas
         private bool CoordenadaValida(int fileira, int coluna)
         {
             return fileira >= 0 && fileira < FILEIRAS
                 && coluna >= 0 && coluna < COLUNAS;
         }
 
-        // ---------------------------------------------------------------
         // Formatação de valores monetários no padrão "R$ 9999,99"
-        // ---------------------------------------------------------------
         private static string FormatarMoeda(decimal valor)
         {
             return "R$ " + valor.ToString("0.00", CultureInfo.GetCultureInfo("pt-BR"));
