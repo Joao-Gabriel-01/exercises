@@ -5,9 +5,6 @@ namespace BilheteriaTeatro
 {
     internal static class Program
     {
-        /// <summary>
-        /// Ponto de entrada principal da aplicação.
-        /// </summary>
         [STAThread]
         static void Main()
         {
