@@ -1,5 +1,5 @@
 /*
-  Aluno: João Gabriel da Silva
+  Aluno: João Gabriel da Silva e Guilherme Bertero
 
   1 - Desenvolver o seguinte sistema abaixo, empregando os conhecimentos
       adquiridos nas aulas sobre interfaces gráficas em java.
