@@ -2,14 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-// ============================================================
-// Projeto Agenda (Contatos) - Listas / Console Application
-// ============================================================
-
 namespace ProjetoAgenda
 {
-    // ======================== MODEL ========================
-
     public class Data
     {
         private int dia;
@@ -92,7 +86,6 @@ namespace ProjetoAgenda
         {
             DateTime hoje = DateTime.Today;
             int idade = hoje.Year - dtNasc.Ano;
-            // ainda nao fez aniversario neste ano
             if (hoje.Month < dtNasc.Mes || (hoje.Month == dtNasc.Mes && hoje.Day < dtNasc.Dia))
                 idade--;
             return idade;
@@ -102,10 +95,8 @@ namespace ProjetoAgenda
         {
             if (t == null) return;
 
-            // o primeiro telefone sempre e o principal
             if (telefones.Count == 0) t.Principal = true;
 
-            // so pode existir um telefone principal
             if (t.Principal)
             {
                 foreach (Telefone outro in telefones)
@@ -132,7 +123,6 @@ namespace ProjetoAgenda
             return sb.ToString();
         }
 
-        // Dois contatos sao iguais quando possuem o mesmo nome (sem diferenciar maiusculas)
         public override bool Equals(object obj)
         {
             Contato outro = obj as Contato;
@@ -154,7 +144,7 @@ namespace ProjetoAgenda
 
         public bool adicionar(Contato c)
         {
-            if (c == null || agenda.Contains(c)) return false; // nao permite duplicados
+            if (c == null || agenda.Contains(c)) return false; 
             agenda.Add(c);
             return true;
         }
@@ -166,7 +156,6 @@ namespace ProjetoAgenda
             return pos >= 0 ? agenda[pos] : null;
         }
 
-        // Substitui os dados do contato existente pelos dados de c
         public bool alterar(Contato c)
         {
             if (c == null) return false;
@@ -182,8 +171,6 @@ namespace ProjetoAgenda
             return agenda.Remove(c);
         }
     }
-
-    // ======================== VIEW ========================
 
     public class AgendaView
     {
@@ -222,7 +209,6 @@ namespace ProjetoAgenda
             }
         }
 
-        // Retorna "" se o usuario apenas apertar Enter
         public string lerTextoOpcional(string mensagem)
         {
             Console.Write(mensagem);
@@ -241,7 +227,6 @@ namespace ProjetoAgenda
             }
         }
 
-        // Le dd/mm/aaaa ate ficar valido
         public Data lerData(string mensagem)
         {
             while (true)
@@ -309,8 +294,6 @@ namespace ProjetoAgenda
         }
     }
 
-    // ===================== CONTROLLER =====================
-
     public class AgendaController
     {
         private Contatos contatos = new Contatos();
@@ -334,8 +317,7 @@ namespace ProjetoAgenda
                 }
             } while (opcao != 0);
         }
-
-        // Contato "modelo" so com o nome, usado nas buscas (Equals compara pelo nome)
+        
         private Contato modeloDeBusca(string nome)
         {
             return new Contato(nome, "", new Data(1, 1, 2000));
@@ -436,8 +418,6 @@ namespace ProjetoAgenda
             }
         }
     }
-
-    // ======================== MAIN ========================
 
     class Program
     {
