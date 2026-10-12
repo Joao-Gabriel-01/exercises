@@ -2,14 +2,8 @@ using System;
 using System.Globalization;
 using System.Text;
 
-// ============================================================
-// Projeto Restaurante - POO / MVC Console Application
-// ============================================================
-
 namespace ProjetoRestaurante
 {
-    // ======================== MODEL ========================
-
     public class Item
     {
         private int id;
@@ -55,7 +49,7 @@ namespace ProjetoRestaurante
                     return true;
                 }
             }
-            return false; // pedido cheio (10 itens)
+            return false; 
         }
 
         public bool removerItem(Item item)
@@ -134,7 +128,7 @@ namespace ProjetoRestaurante
                     return true;
                 }
             }
-            return false; // limite diario de 50 pedidos
+            return false; 
         }
 
         // Busca pelo id do pedido informado
@@ -156,7 +150,7 @@ namespace ProjetoRestaurante
             {
                 if (pedidos[i] != null && pedidos[i].Id == pedido.Id)
                 {
-                    pedidos[i] = null; // o id nao e reaproveitado
+                    pedidos[i] = null; 
                     return true;
                 }
             }
@@ -172,7 +166,6 @@ namespace ProjetoRestaurante
         }
     }
 
-    // ======================== VIEW ========================
 
     public class RestauranteView
     {
@@ -260,8 +253,6 @@ namespace ProjetoRestaurante
         }
     }
 
-    // ===================== CONTROLLER =====================
-
     public class RestauranteController
     {
         private Restaurante restaurante = new Restaurante();
@@ -287,7 +278,6 @@ namespace ProjetoRestaurante
             } while (opcao != 0);
         }
 
-        // Cria um Pedido "modelo" apenas com o id para usar nas buscas
         private Pedido localizar()
         {
             int id = view.lerInt("Numero do pedido: ");
@@ -363,8 +353,6 @@ namespace ProjetoRestaurante
             view.listarPedidos(restaurante.Pedidos, restaurante.somaGeralDoDia());
         }
     }
-
-    // ======================== MAIN ========================
 
     class Program
     {
